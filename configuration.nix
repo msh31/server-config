@@ -84,7 +84,7 @@
   environment.systemPackages = with pkgs; [
      git neovim tmux lazygit
      btop ncdu ripgrep fd
-     smartmontools pciutils usbutils
+     smartmontools pciutils usbutils fastfetch
   ];
 
   services.jellyfin.enable = true;
@@ -121,5 +121,10 @@
     "d /data/media/movies   2775 admin media -"
     "d /data/media/shows    2775 admin media -"
   ];
-
+ 
+  # iGPU 
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [ intel-vaapi-driver ];
+  };
 }
