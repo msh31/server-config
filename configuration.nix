@@ -15,6 +15,9 @@
   boot.loader.grub.device = "/dev/sdb";
   boot.loader.grub.useOSProber = true;
 
+  # Memory Test
+  # boot.loader.grub.memtest86.enable = true;
+
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -80,12 +83,7 @@
      smartmontools pciutils usbutils
   ];
 
-  nixarr = {
-    enable = true;
-    mediaDir = "/data/media";
-    stateDir = "/data/.state/nixarr";
-    jellyfin.enable = true;
-  };
+  services.jellyfin.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
