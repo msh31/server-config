@@ -52,6 +52,7 @@
     variant = "";
   };
 
+  # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
     settings.PermitRootLogin = "no";
@@ -67,15 +68,24 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
   };
+  users.users.admin.openssh.authorizedKeys.keys = [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC3+g4hdcc44+1rez/GaigfQWXZrXqaDkuwGy6SC8r0ccmrEzDaIT+qI4vfSLoMbGkNczYyYjYrv3pM7PH4TahpWzCCxCZO4omWVDIONY5uJVyORKUfDk/IjSeJDwpKcaqrHasVmrnmxGnJcLpQsFscaqaX5TmBIILjKcr30YOOwycw2VaM+dIelW2UONKfvSQYz9/k9WD8EOQe62FjIJpZUNEvT0S8rFYhLZNx3dXtzyPvZgMe4eKNdMjB4WR6/yIa9Ys887/vW/35UI5FvbTPdMHJZbwIhA4nctMMgwkla4T2EIAQxoSNMbbT6Gxl+0i+E80y7s1GNQl3hf/iROKHpEBxbm4AdD4PYFBlB9CW0Hdmk7Yw2CwDNWfwqv3S3KhaXIFN6ichbGXq1yqVnudzUNBnMitSdC2OP+1jM4VxhwAyt0FivTFDP+KuJHiLv5PVio1am7jua8949Y8pXTK7di2aT4TLaURCEvuO7wyYXA5u06RgPV/IfDh5895z4Z5XNYsuAidcE6EC2iCeVJoHBW4ajB+lVCi762hkKY+R9IJegQmRZ/CPraeFBl2mL/ZWI9VjDWJDn1Nw+QQW9KJPLv17flgD3MThbjmbOV/qhSBLJasZgHZ3YJi9Vr+ID1lVSdQAy5GLNe03CGSux6RqESwblFDw7NGttFQs7oW11w== marco@marco007.dev"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  neovim
-  git 
-# Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+     git neovim tmux lazygit
+     btop ncdu ripgrep fd
+     smartmontools pciutils usbutils
   ];
+
+  nixarr = {
+    enable = true;
+    mediaDir = "/data/media";
+    stateDir = "/data/.state/nixarr";
+    jellyfin.enable = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -87,10 +97,8 @@
 
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
   # Open ports in the firewall.
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
