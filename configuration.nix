@@ -10,6 +10,12 @@
       ./hardware-configuration.nix
     ];
 
+  # disks
+  fileSystems."/data" = {
+    device = "/dev/disk/by-uuid/e46edb03-c688-4907-a2fc-e869b3b181c9";
+    fsType = "ext4";
+  };
+
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sdb";
