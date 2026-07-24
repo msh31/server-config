@@ -156,10 +156,17 @@
     enable = true;
     wireguardConfigFile = "/etc/wireguard/mullvad.conf";
     accessibleFrom = [ "100.64.0.0/10" "192.168.178.0/24" "127.0.0.1" ];
-    portMappings = [ { from = 8080; to = 8080; protocol = "tcp"; } ];
+    portMappings = [ 
+      { from = 8080; to = 8080; protocol = "tcp"; }
+      { from = 9696; to = 9696; protocol = "tcp"; }
+    ];
   };
 
   systemd.services.qbittorrent.vpnConfinement = {
+    enable = true;
+    vpnNamespace = "wg";
+  };
+  systemd.services.prowlarr.vpnConfinement = {
     enable = true;
     vpnNamespace = "wg";
   };
