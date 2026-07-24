@@ -18,7 +18,23 @@
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "vpn-confinement": "vpn-confinement"
+      }
+    },
+    "vpn-confinement": {
+      "locked": {
+        "lastModified": 1784582736,
+        "narHash": "sha256-a3V/LkUvwbN30QlCwPjNQq88TGOXiqXAzcYTSWgYIp4=",
+        "owner": "Maroka-chan",
+        "repo": "VPN-Confinement",
+        "rev": "bd17046da0262f3a93524845982825fa2ed23f40",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Maroka-chan",
+        "repo": "VPN-Confinement",
+        "type": "github"
       }
     }
   },
